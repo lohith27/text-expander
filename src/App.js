@@ -43,18 +43,13 @@ function TextExpander({
   collapseButtonText = "Collapse text",
   buttonColor = "blue",
 }) {
-  const [textToShow, setTextToShow] = useState(
-    String(children).slice(0, collapsedNumWords)
-  );
-
   const [buttonToShow, setButtonToShow] = useState(expandButtonText);
+  const textToShow =
+    buttonToShow === expandButtonText
+      ? children.slice(0, collapsedNumWords)
+      : children;
 
   function toggleButtonClick() {
-    if (buttonToShow === expandButtonText) {
-      setTextToShow(children);
-    } else {
-      setTextToShow(children.slice(0, collapsedNumWords));
-    }
     setButtonToShow((button) =>
       button === expandButtonText ? collapseButtonText : expandButtonText
     );
